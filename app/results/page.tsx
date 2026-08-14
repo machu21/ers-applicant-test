@@ -1,24 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle2, AlertTriangle, User, Copy, Check } from "lucide-react";
 import Link from "next/link";
 
-export default function ResultsPage() {
+// 1. Move all the logic into a separate component
+function ResultsContent() {
   const searchParams = useSearchParams();
   const [data, setData] = useState<any>(null);
   const [type, setType] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-
   const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
 
   useEffect(() => {
     const rawType = searchParams.get("type");
@@ -32,13 +25,19 @@ export default function ResultsPage() {
     try {
       const decodedString = atob(rawData);
       const parsed = JSON.parse(decodedString);
-
+      
       setType(rawType);
       setData(parsed);
     } catch (err) {
       setError("The link appears to be broken or tampered with.");
     }
   }, [searchParams]);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   if (error) {
     return (
@@ -55,19 +54,18 @@ export default function ResultsPage() {
 
   if (!data || !type) return null;
 
-  const MAX_TRAIT_SCORE = 15;
+  const MAX_TRAIT_SCORE = 15; 
 
   return (
     <main className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 flex justify-center">
       <div className="w-full max-w-3xl space-y-8">
-
+        
         <div className="text-center">
           <h1 className="text-3xl font-bold text-slate-900">
             {type === 'english' ? "English Assessment Results" : "Personality Assessment Results"}
           </h1>
           <p className="text-slate-500 mt-2">Elevate Remote Solutions</p>
-
-          {/* NEW: Copy Link Action for Applicant */}
+          
           <div className="mt-6 flex justify-center">
             <button
               onClick={handleCopy}
@@ -94,8 +92,8 @@ export default function ResultsPage() {
               </div>
               <p className="text-slate-500">Overall Accuracy</p>
               <div className="w-full bg-slate-100 rounded-full h-4 mt-6 max-w-md mx-auto">
-                <div
-                  className={`h-4 rounded-full transition-all ${data.score >= 80 ? 'bg-emerald-500' : data.score >= 60 ? 'bg-amber-400' : 'bg-red-500'}`}
+                <div 
+                  className={`h-4 rounded-full transition-all ${data.score >= 80 ? 'bg-emerald-500' : data.score >= 60 ? 'bg-amber-400' : 'bg-red-500'}`} 
                   style={{ width: `${data.score}%` }}
                 ></div>
               </div>
@@ -117,7 +115,7 @@ export default function ResultsPage() {
                 {Object.entries(data.traits).map(([trait, score]) => {
                   const numScore = Number(score);
                   const percentage = Math.round((numScore / MAX_TRAIT_SCORE) * 100);
-
+                  
                   return (
                     <div key={trait}>
                       <div className="flex justify-between text-sm font-medium mb-2">
@@ -125,8 +123,8 @@ export default function ResultsPage() {
                         <span className="text-slate-500">{numScore} / {MAX_TRAIT_SCORE}</span>
                       </div>
                       <div className="w-full bg-slate-100 rounded-full h-3">
-                        <div
-                          className="bg-emerald-500 h-3 rounded-full transition-all"
+                        <div 
+                          className="bg-emerald-500 h-3 rounded-full transition-all" 
                           style={{ width: `${percentage}%` }}
                         ></div>
                       </div>
@@ -137,7 +135,7 @@ export default function ResultsPage() {
             </div>
           </div>
         )}
-
+        
         <div className="text-center pt-8 border-t border-slate-200">
           <Link href="/" className="text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors">
             ← View Portal
@@ -146,5 +144,18 @@ export default function ResultsPage() {
 
       </div>
     </main>
+  );
+}
+
+// 2. Wrap the content in a Suspense boundary for the default export
+export default function ResultsPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="text-slate-500 animate-pulse font-medium">Loading results...</div>
+      </main>
+    }>
+      <ResultsContent />
+    </Suspense>
   );
 }
