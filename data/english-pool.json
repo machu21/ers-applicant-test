@@ -1,0 +1,82 @@
+[
+  {
+    "id": "eng_01",
+    "text": "The seller requested that the contract ___ sent over by the end of the day.",
+    "options": ["is", "be", "was", "has been"],
+    "correctAnswer": "be",
+    "category": "grammar"
+  },
+  {
+    "id": "eng_02",
+    "text": "Before we can push this property to the disposition team, we need to ___ the recent market comps.",
+    "options": ["pull out", "pull", "pulling", "pulled"],
+    "correctAnswer": "pull",
+    "category": "vocabulary"
+  },
+  {
+    "id": "eng_03",
+    "text": "If a lead ___ not answered after three attempts, please move their profile to the 'Unresponsive' workflow in the CRM.",
+    "options": ["has", "have", "had", "having"],
+    "correctAnswer": "has",
+    "category": "grammar"
+  },
+  {
+    "id": "eng_04",
+    "text": "Which of the following is the most professional way to tell a client you don't know the answer but will find out?",
+    "options": [
+      "I don't know, let me ask my boss.",
+      "I'm not sure about that, give me a second.",
+      "That's a great question. Let me verify that with our team and get right back to you.",
+      "I have no idea, let me check."
+    ],
+    "correctAnswer": "That's a great question. Let me verify that with our team and get right back to you.",
+    "category": "client-communication"
+  },
+  {
+    "id": "eng_05",
+    "text": "___ you require any further assistance setting up your white-label account, please do not hesitate to reach out.",
+    "options": ["Could", "Would", "Should", "Might"],
+    "correctAnswer": "Should",
+    "category": "grammar"
+  },
+  {
+    "id": "eng_06",
+    "text": "We need to expedite this task. The deadline is ___ approaching.",
+    "options": ["fast", "fastly", "quick", "rapid"],
+    "correctAnswer": "fast",
+    "category": "vocabulary"
+  },
+  {
+    "id": "eng_07",
+    "text": "Read the following message from a client: 'I signed the agreement yesterday, but I haven't received the counter-signed copy yet. Please send it ASAP.'\n\nWhat is the most appropriate response?",
+    "options": [
+      "We will send it soon.",
+      "Apologies for the delay. I have attached the fully executed agreement to this email.",
+      "You should get it today.",
+      "Why didn't you receive it? Let me check."
+    ],
+    "correctAnswer": "Apologies for the delay. I have attached the fully executed agreement to this email.",
+    "category": "reading-comprehension"
+  },
+  {
+    "id": "eng_08",
+    "text": "The acquisition specialist, along with two virtual assistants, ___ attending the training session on the new automations.",
+    "options": ["is", "are", "were", "be"],
+    "correctAnswer": "is",
+    "category": "grammar"
+  },
+  {
+    "id": "eng_09",
+    "text": "Our primary objective is to streamline the intake process ___ reducing the friction for inbound leads.",
+    "options": ["thereby", "however", "although", "despite"],
+    "correctAnswer": "thereby",
+    "category": "vocabulary"
+  },
+  {
+    "id": "eng_10",
+    "text": "I ___ to the meeting notes you sent over earlier, but I noticed the section on daily KPIs was missing.",
+    "options": ["referred", "referenced", "look", "saw"],
+    "correctAnswer": "referred",
+    "category": "vocabulary"
+  }
+]

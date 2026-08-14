@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pers_01",
+    "statement": "When I encounter a technical issue I haven't seen before, I prefer to research solutions myself before asking my manager.",
+    "trait": "autonomy",
+    "polarity": 1
+  },
+  {
+    "id": "pers_02",
+    "statement": "I often find it tedious to double-check my work if I feel confident I did it correctly the first time.",
+    "trait": "conscientiousness",
+    "polarity": -1
+  },
+  {
+    "id": "pers_03",
+    "statement": "If a client sends an angry message regarding a delayed process, my immediate reaction is to escalate it to a supervisor rather than trying to de-escalate it first.",
+    "trait": "communication",
+    "polarity": -1
+  },
+  {
+    "id": "pers_04",
+    "statement": "I feel comfortable managing my own schedule as long as I hit my daily KPIs and deadlines.",
+    "trait": "autonomy",
+    "polarity": 1
+  },
+  {
+    "id": "pers_05",
+    "statement": "I rely on strict daily routines and detailed checklists to ensure I don't miss any steps in a multi-stage process.",
+    "trait": "conscientiousness",
+    "polarity": 1
+  },
+  {
+    "id": "pers_06",
+    "statement": "When providing an update to the team, I prefer giving a brief, high-level summary rather than breaking down specific details.",
+    "trait": "communication",
+    "polarity": -1
+  },
+  {
+    "id": "pers_07",
+    "statement": "If I notice a recurring inefficiency in our team's workflow, I will proactively suggest a new automation or process rather than just adapting to it.",
+    "trait": "autonomy",
+    "polarity": 1
+  },
+  {
+    "id": "pers_08",
+    "statement": "I have occasionally submitted reports or data entries with minor typos because I was rushing to meet a deadline.",
+    "trait": "conscientiousness",
+    "polarity": -1
+  },
+  {
+    "id": "pers_09",
+    "statement": "I am very careful about my tone in written messages to ensure I don't sound too blunt or demanding.",
+    "trait": "communication",
+    "polarity": 1
+  },
+  {
+    "id": "pers_10",
+    "statement": "I prefer jobs where my tasks are explicitly laid out for me step-by-step every single day.",
+    "trait": "autonomy",
+    "polarity": -1
+  }
+]
