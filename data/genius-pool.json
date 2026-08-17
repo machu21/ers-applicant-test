@@ -1,0 +1,73 @@
+[
+  { 
+    "id": "wg_1", 
+    "text": "I naturally notice when systems, processes, or situations aren't working as well as they could be.", 
+    "trait": "wonder", 
+    "polarity": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop"
+  },
+  { "id": "wg_2", "text": "I spend a lot of time pondering how we can improve our current environment or workflows.", "trait": "wonder", "polarity": 1 },
+  { "id": "wg_3", "text": "I enjoy stepping back to ask big-picture questions about why we do things a certain way.", "trait": "wonder", "polarity": 1 },
+  { "id": "wg_4", "text": "I often find myself contemplating the untapped potential of a project before it even starts.", "trait": "wonder", "polarity": 1 },
+  { "id": "wg_5", "text": "I am comfortable sitting with unresolved problems and observing them rather than rushing to fix them immediately.", "trait": "wonder", "polarity": 1 },
+  
+  { "id": "wg_6", "text": "I love coming up with completely new solutions to complex, unsolved problems.", "trait": "invention", "polarity": 1 },
+  { 
+    "id": "wg_7", 
+    "text": "Brainstorming from scratch is my favorite part of any new project.", 
+    "trait": "invention", 
+    "polarity": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop"
+  },
+  { "id": "wg_8", "text": "I easily generate original ideas and novel concepts when faced with a roadblock.", "trait": "invention", "polarity": 1 },
+  { "id": "wg_9", "text": "I prefer creating something entirely new over following a step-by-step instruction manual.", "trait": "invention", "polarity": 1 },
+  { "id": "wg_10", "text": "I find joy in designing concepts or workflows that haven't been tried before.", "trait": "invention", "polarity": 1 },
+  
+  { "id": "wg_11", "text": "I have a strong intuition for whether a new idea will actually work in the real world.", "trait": "discernment", "polarity": 1 },
+  { 
+    "id": "wg_12", 
+    "text": "People frequently ask me to review their plans to find the hidden flaws or refine the details.", 
+    "trait": "discernment", 
+    "polarity": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"
+  },
+  { "id": "wg_13", "text": "I can quickly evaluate multiple options, spot patterns, and identify the best path forward.", "trait": "discernment", "polarity": 1 },
+  { "id": "wg_14", "text": "I enjoy refining and tweaking someone else's idea to make it significantly better.", "trait": "discernment", "polarity": 1 },
+  { "id": "wg_15", "text": "I rely heavily on my gut instinct and pattern recognition when making decisions on new proposals.", "trait": "discernment", "polarity": 1 },
+  
+  { 
+    "id": "wg_16", 
+    "text": "I get energized by organizing people and getting them excited about a shared goal.", 
+    "trait": "galvanizing", 
+    "polarity": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop"
+  },
+  { "id": "wg_17", "text": "I naturally take charge to get a project off the ground and assign initial tasks.", "trait": "galvanizing", "polarity": 1 },
+  { "id": "wg_18", "text": "I enjoy recruiting and persuading others to join in on a new initiative.", "trait": "galvanizing", "polarity": 1 },
+  { "id": "wg_19", "text": "I am comfortable pushing people out of their comfort zones to rally them around a vision.", "trait": "galvanizing", "polarity": 1 },
+  { "id": "wg_20", "text": "I love building momentum and instilling a sense of urgency in a team.", "trait": "galvanizing", "polarity": 1 },
+  
+  { "id": "wg_21", "text": "I find immense joy in helping others bring their ideas and projects to life.", "trait": "enablement", "polarity": 1 },
+  { 
+    "id": "wg_22", 
+    "text": "I am quick to volunteer my support and time when someone needs help executing a plan.", 
+    "trait": "enablement", 
+    "polarity": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop"
+  },
+  { "id": "wg_23", "text": "I thrive in a supportive role, adapting to exactly what the team needs to succeed.", "trait": "enablement", "polarity": 1 },
+  { "id": "wg_24", "text": "I anticipate what my team members need and provide it before they even have to ask.", "trait": "enablement", "polarity": 1 },
+  { "id": "wg_25", "text": "I get satisfaction from answering the call for help on projects championed by others.", "trait": "enablement", "polarity": 1 },
+  
+  { "id": "wg_26", "text": "I get a deep sense of satisfaction from crossing tasks off a list and finishing a project.", "trait": "tenacity", "polarity": 1 },
+  { "id": "wg_27", "text": "I have no problem pushing through tedious or repetitive work to hit a deadline.", "trait": "tenacity", "polarity": 1 },
+  { 
+    "id": "wg_28", 
+    "text": "I am driven by seeing tangible results and ensuring nothing falls through the cracks.", 
+    "trait": "tenacity", 
+    "polarity": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop"
+  },
+  { "id": "wg_29", "text": "I hate leaving things unfinished and will push hard to get a project across the finish line.", "trait": "tenacity", "polarity": 1 },
+  { "id": "wg_30", "text": "I pride myself on execution, reliability, and overcoming obstacles to complete a task.", "trait": "tenacity", "polarity": 1 }
+]

@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import personalityQuestions from "../../data/personality-pool.json";
+import personalityQuestions from "../../data/genius-pool.json";
 import { useAssessmentStore } from "@/store/useAssessmentStore";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Image as ImageIcon } from "lucide-react";
 
 // The 5-point scale definition
 const scaleOptions = [
@@ -33,16 +33,20 @@ export default function PersonalityTest() {
     }
   }, [personalityStatus, router]);
 
-const handleNext = () => {
+  const handleNext = () => {
     if (selectedValue === null) return;
 
     setPersonalityAnswer(currentQuestion.id, selectedValue);
 
     if (isLastQuestion) {
+      // UPDATED: Now tallies the 6 Types of Working Genius
       const finalTraits: Record<string, number> = {
-        autonomy: 0,
-        conscientiousness: 0,
-        communication: 0
+        wonder: 0,
+        invention: 0,
+        discernment: 0,
+        galvanizing: 0,
+        enablement: 0,
+        tenacity: 0
       };
       
       const allAnswers = { ...useAssessmentStore.getState().personalityAnswers, [currentQuestion.id]: selectedValue };
@@ -55,7 +59,6 @@ const handleNext = () => {
 
       completePersonalityTest(finalTraits);
       
-      // NEW: Generate the URL and go straight to the results page!
       const encodedData = btoa(JSON.stringify({ traits: finalTraits }));
       router.push(`/results?type=personality&data=${encodedData}`);
       
@@ -85,15 +88,32 @@ const handleNext = () => {
       </div>
 
       {/* Statement Card */}
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden transition-all">
         
-        <div className="p-8 md:p-10 text-center">
+        <div className="p-8 md:p-10 text-center flex flex-col items-center">
+          
+          {/* NEW: Conditional Image Rendering */}
+          {currentQuestion.imageUrl && (
+            <div className="w-full max-w-md h-64 relative mb-8 rounded-xl overflow-hidden shadow-sm border border-slate-100 bg-slate-50 flex items-center justify-center">
+              <img 
+                src={currentQuestion.imageUrl} 
+                alt="Assessment context" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback if image fails to load
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
+            </div>
+          )}
+
+          {/* UPDATED: Uses currentQuestion.text to match the JSON */}
           <h2 className="text-2xl font-medium text-slate-900 mb-12 leading-relaxed">
-            "{currentQuestion.statement}"
+            "{currentQuestion.text}"
           </h2>
 
           {/* Likert Scale */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-2">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-2 w-full">
             {scaleOptions.map((option) => (
               <button
                 key={option.value}

@@ -2,13 +2,21 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { CheckCircle2, AlertTriangle, User, Copy, Check } from "lucide-react";
+import { CheckCircle2, AlertTriangle, User, Copy, Check, Zap, Minus, BatteryWarning } from "lucide-react";
 import Link from "next/link";
+import AdBanner from "@/components/AdBanner";
 
-// 1. Move all the logic into a separate component
+// 1. Define the exact shape of our URL payload for TypeScript
+interface DecodedData {
+  score?: number;
+  traits?: Record<string, number>;
+}
+
 function ResultsContent() {
   const searchParams = useSearchParams();
-  const [data, setData] = useState<any>(null);
+
+  // 2. Apply the interface here instead of <any>
+  const [data, setData] = useState<DecodedData | null>(null);
   const [type, setType] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -25,7 +33,7 @@ function ResultsContent() {
     try {
       const decodedString = atob(rawData);
       const parsed = JSON.parse(decodedString);
-      
+
       setType(rawType);
       setData(parsed);
     } catch (err) {
@@ -54,18 +62,33 @@ function ResultsContent() {
 
   if (!data || !type) return null;
 
-  const MAX_TRAIT_SCORE = 15; 
+  const MAX_TRAIT_SCORE = 25;
+
+  const getSortedTraits = () => {
+    if (!data.traits) return { geniuses: [], competencies: [], frustrations: [] };
+
+    // Because data.traits is explicitly typed, 'score' is known as a number
+    const sorted = Object.entries(data.traits).sort((a, b) => b[1] - a[1]);
+
+    return {
+      geniuses: sorted.slice(0, 2),
+      competencies: sorted.slice(2, 4),
+      frustrations: sorted.slice(4, 6)
+    };
+  };
+
+  const { geniuses, competencies, frustrations } = getSortedTraits();
 
   return (
     <main className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 flex justify-center">
       <div className="w-full max-w-3xl space-y-8">
-        
+
         <div className="text-center">
           <h1 className="text-3xl font-bold text-slate-900">
-            {type === 'english' ? "English Assessment Results" : "Personality Assessment Results"}
+            {type === 'english' ? "English Assessment Results" : "Working Genius Profile"}
           </h1>
           <p className="text-slate-500 mt-2">Elevate Remote Solutions</p>
-          
+
           <div className="mt-6 flex justify-center">
             <button
               onClick={handleCopy}
@@ -92,8 +115,8 @@ function ResultsContent() {
               </div>
               <p className="text-slate-500">Overall Accuracy</p>
               <div className="w-full bg-slate-100 rounded-full h-4 mt-6 max-w-md mx-auto">
-                <div 
-                  className={`h-4 rounded-full transition-all ${data.score >= 80 ? 'bg-emerald-500' : data.score >= 60 ? 'bg-amber-400' : 'bg-red-500'}`} 
+                <div
+                  className={`h-4 rounded-full transition-all ${data.score >= 80 ? 'bg-emerald-500' : data.score >= 60 ? 'bg-amber-400' : 'bg-red-500'}`}
                   style={{ width: `${data.score}%` }}
                 ></div>
               </div>
@@ -101,45 +124,95 @@ function ResultsContent() {
           </div>
         )}
 
-        {/* --- PERSONALITY SCORECARD --- */}
+        {/* --- WORKING GENIUS SCORECARD --- */}
         {type === 'personality' && data.traits && (
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <div className="bg-emerald-50 border-b border-emerald-100 p-4">
               <h2 className="text-lg font-semibold text-emerald-900 flex items-center">
                 <User className="mr-2 w-5 h-5 text-emerald-600" />
-                Behavioral Trait Breakdown
+                Working Genius Breakdown
               </h2>
             </div>
-            <div className="p-8">
-              <div className="space-y-6 max-w-lg mx-auto">
-                {Object.entries(data.traits).map(([trait, score]) => {
-                  const numScore = Number(score);
-                  const percentage = Math.round((numScore / MAX_TRAIT_SCORE) * 100);
-                  
-                  return (
-                    <div key={trait}>
-                      <div className="flex justify-between text-sm font-medium mb-2">
-                        <span className="capitalize text-slate-700">{trait}</span>
-                        <span className="text-slate-500">{numScore} / {MAX_TRAIT_SCORE}</span>
+
+            <div className="p-6 sm:p-8 space-y-8">
+
+              {/* Top 2: Geniuses */}
+              <div className="space-y-4">
+                <h3 className="flex items-center text-sm font-bold text-emerald-700 uppercase tracking-wider">
+                  <Zap className="w-4 h-4 mr-2" /> Working Geniuses (Gives Energy)
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {geniuses.map(([trait, score]) => (
+                    <div key={trait} className="bg-emerald-50/50 border border-emerald-100 p-4 rounded-xl">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="font-bold text-slate-900 capitalize text-lg">{trait}</span>
+                        <span className="text-emerald-700 font-semibold">{score}/{MAX_TRAIT_SCORE}</span>
                       </div>
-                      <div className="w-full bg-slate-100 rounded-full h-3">
-                        <div 
-                          className="bg-emerald-500 h-3 rounded-full transition-all" 
-                          style={{ width: `${percentage}%` }}
-                        ></div>
+                      <div className="w-full bg-emerald-100 rounded-full h-2">
+                        <div className="bg-emerald-500 h-2 rounded-full" style={{ width: `${(score / MAX_TRAIT_SCORE) * 100}%` }}></div>
                       </div>
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
+
+              {/* Middle 2: Competencies */}
+              <div className="space-y-4 pt-4 border-t border-slate-100">
+                <h3 className="flex items-center text-sm font-bold text-amber-600 uppercase tracking-wider">
+                  <Minus className="w-4 h-4 mr-2" /> Working Competencies (Neutral)
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {competencies.map(([trait, score]) => (
+                    <div key={trait} className="bg-amber-50/30 border border-amber-100 p-4 rounded-xl">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="font-bold text-slate-700 capitalize text-lg">{trait}</span>
+                        <span className="text-amber-600 font-semibold">{score}/{MAX_TRAIT_SCORE}</span>
+                      </div>
+                      <div className="w-full bg-amber-100 rounded-full h-2">
+                        <div className="bg-amber-400 h-2 rounded-full" style={{ width: `${(score / MAX_TRAIT_SCORE) * 100}%` }}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom 2: Frustrations */}
+              <div className="space-y-4 pt-4 border-t border-slate-100">
+                <h3 className="flex items-center text-sm font-bold text-rose-600 uppercase tracking-wider">
+                  <BatteryWarning className="w-4 h-4 mr-2" /> Working Frustrations (Drains Energy)
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {frustrations.map(([trait, score]) => (
+                    <div key={trait} className="bg-rose-50/50 border border-rose-100 p-4 rounded-xl">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="font-bold text-slate-700 capitalize text-lg">{trait}</span>
+                        <span className="text-rose-600 font-semibold">{score}/{MAX_TRAIT_SCORE}</span>
+                      </div>
+                      <div className="w-full bg-rose-100 rounded-full h-2">
+                        <div className="bg-rose-400 h-2 rounded-full" style={{ width: `${(score / MAX_TRAIT_SCORE) * 100}%` }}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
         )}
-        
+
         <div className="text-center pt-8 border-t border-slate-200">
           <Link href="/" className="text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors">
             ← View Portal
           </Link>
+        </div>
+
+        {/* --- AD BANNER PLACEMENT --- */}
+        <div className="mt-8">
+          <AdBanner 
+            dataAdSlot="1234567890" // Remember to replace this with your actual Ad Unit Slot ID from AdSense
+            dataAdFormat="auto" 
+            dataFullWidthResponsive={true} 
+          />
         </div>
 
       </div>
@@ -147,7 +220,6 @@ function ResultsContent() {
   );
 }
 
-// 2. Wrap the content in a Suspense boundary for the default export
 export default function ResultsPage() {
   return (
     <Suspense fallback={
