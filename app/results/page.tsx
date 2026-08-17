@@ -95,7 +95,7 @@ function ResultsContent() {
               className="inline-flex items-center justify-center bg-slate-900 hover:bg-slate-800 text-white text-sm font-medium py-2.5 px-5 rounded-lg transition-colors"
             >
               {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
-              {copied ? "Link Copied!" : "Copy Link for Application"}
+              {copied ? "Link Copied!" : "Copy Link for Application or Take a Screenshot"}
             </button>
           </div>
         </div>
